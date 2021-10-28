@@ -46,7 +46,6 @@ public class UserModelNew {
     public void setKotaKabupatenId(int kotaKabupatenId) {
         this.kotaKabupatenId = kotaKabupatenId;
     }
-
     public String getNikUser() {
         return nikUser;
     }
