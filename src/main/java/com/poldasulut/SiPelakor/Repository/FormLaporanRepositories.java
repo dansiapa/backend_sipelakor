@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FormLaporanRepositories extends JpaRepository<FormLaporanModelNew, Integer> {
 
-    FormLaporanModelNew getFormLaporanModelNewByLaporanId(int laporanId);
+    FormLaporanModelNew getFormLaporanModelNewByTanggalKejadian(String tanggalKejadian);
 
 
 }

@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.poldasulut.SiPelakor.Model.UserModel;
@@ -59,11 +61,11 @@ public class UserService {
 		return userRepository.getEmail();
 	}
 	
-	public UserModel getUserByEmail(String email) {
-		return userRepository.getUserModelByUserEmail(email);
+	public UserModel getUserByNik(String nikUser) {
+		return userRepository.getUserModelByNikUser(nikUser);
 	}
-	public boolean login(String email, String password) {
-		UserModel userModel = userRepository.getUserModelByUserEmail(email);
+	public boolean login(String nikUser, String password) {
+		UserModel userModel = userRepository.getUserModelByNikUser(nikUser);
 		if(Objects.nonNull(userModel)) {
 			if(userModel.getUserPassword().equals(password)) {
 				return true;
@@ -72,6 +74,27 @@ public class UserService {
 			}
 		} else {
 			return false;
+		}
+	}
+	
+	public ResponseEntity<UserModel> updateData (int id, UserModel userModel){
+		Optional<UserModel> userModelUpdate = userRepository.findById(id);
+		if(userModelUpdate.isPresent()) {
+			UserModel uModel = userModelUpdate.get();
+			uModel.setKotaKabupatenId(userModel.getKotaKabupatenId());
+			uModel.setNikUser(userModel.getNikUser());
+			uModel.setUserName(userModel.getUserName());
+			uModel.setJobs(userModel.getJobs());
+			uModel.setAddressUser(userModel.getAddressUser());
+			uModel.setNomorUser(userModel.getNomorUser());
+			uModel.setUserEmail(userModel.getUserEmail());
+			uModel.setUserPassword(userModel.getUserPassword());
+			uModel.setUserStatus(userModel.getUserStatus());
+			uModel.setTanggalLahir(userModel.getTanggalLahir());
+			return new ResponseEntity<>(userRepository.save(uModel),HttpStatus.OK);
+			
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 

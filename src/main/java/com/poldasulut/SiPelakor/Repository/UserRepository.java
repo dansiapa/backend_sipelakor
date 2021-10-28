@@ -9,7 +9,7 @@ import com.poldasulut.SiPelakor.Model.UserModel;
 
 public interface UserRepository extends JpaRepository<UserModel, Integer> {
 
-	UserModel getUserModelByUserEmail(String userEmail);
+	UserModel getUserModelByNikUser(String nikUser);
 	UserModel findUserModelByUserEmailAndNomorUser(String userEmail, String nomorUser);
 	
 	@Query("select u.userEmail from UserModel u")

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.poldasulut.SiPelakor.Model.NoFK.UserModelNew;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.poldasulut.SiPelakor.GetResponse.GetUserModel;
@@ -40,19 +41,19 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/person/{email}")
-	public UserModel getUserByEmail(@PathVariable String email) {
-		return userService.getUserByEmail(email);
+	@GetMapping("/person/{nikUser}")
+	public UserModel getUserByNikUser(@PathVariable String nikUser) {
+		return userService.getUserByNik(nikUser);
 	}
 	
 	@GetMapping("/login")
-	public GetUserModel login(@RequestParam String email, @RequestParam String password) {
+	public GetUserModel login(@RequestParam String nikUser, @RequestParam String password) {
 		GetUserModel getUserModel = new GetUserModel();
 		UserModelNew userModel = new UserModelNew();
 		
-		if(userService.login(email, password)) {
+		if(userService.login(nikUser, password)) {
 			getUserModel.setStatus("success");
-			getUserModel.setUserModel(getUserByEmail(email));
+			getUserModel.setUserModel(getUserByNikUser(nikUser));
 			getUserModel.setUserId(userModel.getUserId());
 			return getUserModel;
 		} else {
@@ -78,6 +79,12 @@ public class UserController {
 	@GetMapping("/person/id/{id}")
 	public UserModel getUser(@PathVariable int id) {
 		return userService.getUser(id).get();
+	}
+	
+	//PUT OURBUDGET
+	@PutMapping("/update/{id}")
+	public ResponseEntity<UserModel> updateData(@PathVariable("id") int id, @RequestBody UserModel uModel) {
+		return userService.updateData(id, uModel);	
 	}
 	
 

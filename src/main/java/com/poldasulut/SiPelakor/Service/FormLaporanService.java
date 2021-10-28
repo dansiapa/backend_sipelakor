@@ -88,13 +88,13 @@ public class FormLaporanService {
 //        }
 //    }
 
-    public FormLaporanModelNew createFormInvitation(int laporanId, int user, String tanggalKejadian, String lokasi,
+    public FormLaporanModelNew createFormInvitation(int user, String tanggalKejadian, String lokasi,
                                                     String dokument1, String dokument2, String dokument3, String ktp,
                                                     String kta, String detail, String statusLaporan,
                                                     String statusPelapor) {
         FormLaporanModelNew formInvitation = new FormLaporanModelNew();
 
-        if(Objects.nonNull(formLaporanRepositories.getFormLaporanModelNewByLaporanId(laporanId))) {
+        if(Objects.nonNull(formLaporanRepositories.getFormLaporanModelNewByTanggalKejadian(tanggalKejadian))) {
             return null;
         }else {
             formInvitation.setUserId(user);
