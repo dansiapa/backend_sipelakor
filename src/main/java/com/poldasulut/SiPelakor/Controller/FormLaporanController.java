@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api/v1/form ", produces = {"application/json"})
 public class FormLaporanController {
 
     @Autowired

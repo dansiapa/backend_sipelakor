@@ -13,7 +13,7 @@ import com.poldasulut.SiPelakor.Model.UserModel;
 import com.poldasulut.SiPelakor.Service.UserService;
 
 @RestController
-@RequestMapping(value = "/api/v1/user  ", produces = {"application/json"})
+
 public class UserController {
 	
 	private UserService userService;
